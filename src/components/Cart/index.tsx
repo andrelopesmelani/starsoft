@@ -55,7 +55,9 @@ const Cart = ({ isCartOpen, setIsCartOpen }: CartProps) => {
           transition={{ delay: 0.5 }}
         >
           {cartItems.length === 0 ? (
-            <p className={styles.emptyMessage}>Seu carrinho está vazio</p>
+            <div className={styles.emptyContainer}>
+              <p className={styles.emptyMessage}>Seu carrinho está vazio</p>
+            </div>
           ) : (
             cartItems.map((item) => <CartItem key={item.id} data={item} />)
           )}
