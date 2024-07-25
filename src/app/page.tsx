@@ -1,95 +1,83 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import styles from "@/styles/page.module.scss";
+import Card, { ProductType } from "@/components/Card";
+import Button from "@/components/Button";
+import Skeleton from "@/components/Skeleton";
+import { useDispatch } from "react-redux";
+import { add } from "@/store/Cartslice";
+import { CartItemType } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
+
+const fetchProducts = async () => {
+  const res = await fetch(
+    "https://starsoft-challenge-7dfd4a56a575.herokuapp.com/v1/products"
+  );
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await res.json();
+  return data.data;
+};
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+  const [visibleProducts, setVisibleProducts] = useState(8);
+
+  const dispatch = useDispatch();
+
+  const handleAdd = (product: ProductType) => {
+    const cartItem: CartItemType = { ...product, quantity: 1 };
+    dispatch(add(cartItem));
+  };
+
+  const loadMoreProducts = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 8);
+  };
+
+  const calculateProgress = () => {
+    return products.length > 0 ? (visibleProducts / products.length) * 100 : 0;
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.list}>
+        {isLoading
+          ? Array.from({ length: 8 }).map((_, index) => (
+              <Skeleton key={index} />
+            ))
+          : products
+              .slice(0, visibleProducts)
+              .map((product: ProductType) => (
+                <Card
+                  key={product.id}
+                  data={product}
+                  onClick={() => handleAdd(product)}
+                />
+              ))}
+      </div>
+      <div className={styles.loadMore}>
+        <div className={styles.progressBarContainer}>
+          <div
+            className={styles.progressBar}
+            style={{ width: `${calculateProgress()}%` }}
+          ></div>
+        </div>
+        <Button
+          onClick={loadMoreProducts}
+          text={
+            visibleProducts < products.length
+              ? "Carregar mais"
+              : "Você já viu tudo"
+          }
+          color="secondary"
         />
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }

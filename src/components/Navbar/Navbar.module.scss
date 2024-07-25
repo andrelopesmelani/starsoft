@@ -1,0 +1,35 @@
+@import "../../themes/_colors.scss";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: $background;
+  color: #fff;
+  border-bottom: 1px solid $text;
+  max-height: 100px;
+
+  img{
+    width: 80px;
+  }
+
+  .cart {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    img{
+      width: 24px;
+    }
+
+
+    .cartCount {
+      color: $text;
+      font-size: 16px;
+      margin-left: 5px;
+    }
+  }
+}
+
+

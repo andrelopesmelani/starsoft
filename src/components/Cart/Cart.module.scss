@@ -1,0 +1,112 @@
+@import "../../themes/colors";
+
+.cart {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: $background;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  @media (min-width: 600px) {
+    width: 80%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 40%;
+  }
+
+  @media (min-width: 1281px) {
+    width: 35%;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10%;
+
+    .back {
+      height: 40px;
+      width: 40px;
+      background-color: $tertiary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin-left: 20px;
+      cursor: pointer;
+
+      img {
+        width: 25px;
+      }
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 500;
+      color: $text;
+    }
+  }
+
+  .list {
+    margin: 50px 0;
+    overflow-x: auto;
+    height: 75%;
+
+    @media (min-width: 600px) {
+      margin: 100px 0 50px 0;
+    }
+
+    @media (min-width: 1024px) {
+      margin: 30px 0 50px 0;
+    }
+
+    @media (min-width: 1281px) {
+      margin: 30px 0 50px 0;
+    }
+
+    .emptyMessage {
+      text-align: center;
+      align-self: center;
+      margin: 250px 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+
+  .totalContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+    height: 15%;
+
+    .total {
+      font-size: 20px;
+      font-weight: 700;
+      color: $text;
+    }
+
+    .amounted {
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 10px;
+        width: 30px;
+      }
+
+      .price {
+        font-size: 20px;
+        font-weight: 600;
+        color: $text;
+      }
+    }
+  }
+}

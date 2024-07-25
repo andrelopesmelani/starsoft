@@ -1,0 +1,59 @@
+@import "../../themes/colors";
+
+.card {
+  max-width: 100%;
+  background-color: $secondary;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  @media (min-width: 600px) {
+    max-width: 300px;
+  }
+
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+
+    .productImage {
+      border-radius: 8px;
+      margin-bottom: 25px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .productName {
+      font-size: 18px;
+      font-weight: 500;
+      color: $text;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 12px;
+      font-weight: 300;
+      color: $textSecondary;
+      margin-bottom: 15px;
+    }
+  }
+
+  .bottom {
+    width: 100%;
+    .price {
+        font-size: 20px;
+        font-weight: 600;
+        color: $price;
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    
+        img {
+            margin-right: 10px;
+        }
+      }
+  }
+
+
+}

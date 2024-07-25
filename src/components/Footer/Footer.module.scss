@@ -1,0 +1,11 @@
+@import "../../themes/_colors.scss";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: $background;
+  color: #ffffff44;
+  font-size: 12px;
+}

@@ -1,0 +1,32 @@
+# Ignorar a pasta node_modules
+node_modules
+
+# Ignorar a pasta .next, que é a saída do build do Next.js
+.next
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos de cache do npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar o diretório .git
+.git
+
+# Ignorar arquivos de configuração do Docker e do sistema
+Dockerfile
+.dockerignore
+.gitignore
+
+# Ignorar diretórios e arquivos temporários
+tmp
+temp
+*.tmp
+*.swp
+
+# Ignorar diretórios de builds e testes
+build
+dist
+test

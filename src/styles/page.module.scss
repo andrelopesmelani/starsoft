@@ -1,0 +1,61 @@
+@import '../themes/colors';
+
+.container {
+  padding: 50px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 150px;
+  
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    @media (min-width: 1281px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .progressBarContainer {
+    width: 100%;
+    background-color: $tertiary;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  
+  .progressBar {
+    height: 10px;
+    background-color: $primary;
+    width: 0%;
+    transition: width 1s ease;
+  }
+
+  .loadMore {
+    width: 100%;
+    @media (min-width: 600px) {
+      width: 400px;
+    }
+  }
+ 
+  @media (min-width: 600px) {
+    padding: 50px 80px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 150px 100px;
+  }
+
+  @media (min-width: 1281px) {
+    padding: 150px 100px;
+  }
+}
